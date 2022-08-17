@@ -17,7 +17,7 @@ class Worker(QThread):
 
     def run(self):
         while self.working:
-            for i in range(0, 1000000): # 응답없음 발생!!
+            for i in range(0, 100): # 응답없음 발생!!
                 print(f'출력 : {i}')
                 # self.pgbTask.setValue(i)
                 # self.txbLog.append(f'출력 > {i}')
@@ -49,13 +49,13 @@ class qTemplate(QWidget):
     def updateProgress(self, val): # val이 Worker스레드에서 전달받은 반복값
         self.pgbTask.setValue(val)
         self.txbLog.append(f'출력 > {val}')
-        if val == 999999:
+        if val == 99:
             self.worker.working = False
 
 
     def btn1_clicked(self):
         self.txbLog.append('실행!!')
-        self.pgbTask.setRange(0, 999999)
+        self.pgbTask.setRange(0, 99)
         self.worker.start()
         self.worker.working = True
 
